@@ -1,24 +1,101 @@
-export function QuestionDetail({ answer, handleAnswerChange, currentQuestion, index }: { answer: AnswerType, handleAnswerChange: (questionId: number, selectedAnswer: string) => void, currentQuestion: number }) {
+import { type SubmitEventHandler } from "react";
+import type { AnswerType, StatusType } from "../types";
+import { Modal } from "./Modal";
+import { useQuestionStore } from '../store/index';
 
-  console.log("QuestionDetail answer: ", answer);
-  console.log("QuestionDetail currentQuestion: ", currentQuestion);
-  return (
-    <>
-      <h1>Pregunta {index+1}</h1>
-      {/* <p>{answers[index]?.statement} ?</p> */}
-      <p>{answer?.statement} ?</p>
-      <select
-        defaultValue=""
-        key={answer.id}
-        name={`pregunta${answer.id}`}
-        //id={`pregunta${questionId}`} 
-        //value={answers[questionId]?.correctAnswer || ''} 
-        onChange={(e) => handleAnswerChange(answer.id, e.target.value)}>
-        <option value="" disabled>Selecciona una respuesta</option>
-        <option value="a">Opción {`${answer.id}`} 'a'</option>
-        <option value="b">Opción {`${answer.id}`} 'b'</option>
-        <option value="c">Opción {`${answer.id}`} 'c'</option>
-      </select>
-    </>
-  )
+export function QuestionDetail({
+	answer,
+	handleAnswerChange,
+	index,
+  isOpen,
+  setIsOpen,
+  image
+}: {
+	answer: AnswerType;
+  status: StatusType;
+	handleAnswerChange: (questionId: number, selectedAnswer: string) => void;
+  index: number;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  image?: string;
+}) {
+  
+  const setCurrentQuestion = useQuestionStore((state) => state.setCurrentQuestion);
+  const currentQuestion = useQuestionStore((state) => state.currentQuestion)
+  const answersLength = useQuestionStore((state) => state.answersQuantity);
+
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const value = formData.get('answer') as string;
+    handleAnswerChange(answer?.id, value);
+    
+    const isCorrect = value.trim().toLowerCase() === answer?.correctAnswer.trim().toLowerCase()
+    const status = isCorrect ? 'correct' : 'incorrect'
+
+    if (status === 'correct' && currentQuestion < answersLength - 1) {
+      setTimeout(() => {
+        setIsOpen(false);  
+        setCurrentQuestion();  
+      }, 800);
+    }
+    if (status === 'correct' && currentQuestion >= answersLength - 1) {
+      console.log('ultima pregunta respondida correctamente')
+      setTimeout(() => {
+        setIsOpen(false);  
+      }, 800);
+    }
+    if (status === 'incorrect') {
+      console.log(" en if timer Respuesta incorrecta")
+      setTimeout(() => {
+        setIsOpen(false);
+        console.log("Timer cerrado, se puede responder la siguiente pregunta")
+      }, 10000);
+    }
+  };
+
+	return (
+		<>
+			<h1>Pregunta {index + 1}</h1>
+			<p>{answer?.statement}</p>
+      {image && (
+        <img 
+          src={image} 
+          alt="imagen de pregunta" 
+          className="questionImg"
+          width={600}
+          height={498} 
+        />
+        )
+      }
+      <form 
+        onSubmit={handleSubmit} 
+        key={currentQuestion} 
+        className="questionForm"
+      >
+        <fieldset className="optionsList" >
+          {answer?.options.map((option, idx) => (
+            <label key={idx}>
+              <input 
+                type="radio"
+                name="answer"
+                value={option}
+                required
+              /> 
+                {option}
+            </label>
+          ))}
+        </fieldset>
+        <button type="submit" className="submitAnswerBtn">Confirmar</button>
+        {
+          answer?.status !== 'undone' && (
+            <Modal 
+              type={answer?.status === 'correct' ? 'correct' : 'incorrect'} isOpen={isOpen} 
+              setIsOpen={setIsOpen} 
+            />
+          )
+        }
+      </form>
+		</>
+	);
 }
