@@ -7,7 +7,7 @@ type AnswerType = {
 };
 
 type UPDATE_ANSWER = 'UPDATE_ANSWER';
-// Definir el tipo de acción para restablecer el estado de las respuestas
+
 type RESET_ANSWERS = 'RESET_ANSWERS';
 
 type UpdateAnswerAction = {

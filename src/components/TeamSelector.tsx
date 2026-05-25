@@ -2,7 +2,6 @@ import type { TypeTeam } from "../types";
 
 export function TeamSelector({setTeam, team}: {setTeam: (e: React.ChangeEvent<HTMLSelectElement>) => void, team: TypeTeam | ''}) {
 
-  console.log("TEAM EN TEAMSELECTOR: ", team);
   return (
     <section>
         <select 
@@ -11,10 +10,10 @@ export function TeamSelector({setTeam, team}: {setTeam: (e: React.ChangeEvent<HT
           onChange={setTeam}
           value={team}
         >
-          <option value="">Select a team</option>
-          <option value="blue">Team Blue: Alba - Gabriel - Meli </option>
-          <option value="red">Team Red: Tuto - Tuti - Kari - Pri</option>
-          <option value="yellow">Team Yellow: Gael - Aitana - Aimee - Ariel - Sophie - Kaia</option>
+          <option value="">Selecciona tu equipo</option>
+          <option value="blue">Equipo Azul</option>
+          <option value="red">Equipo Rojo</option>
+          <option value="yellow">Equipo Amarillo</option>
         </select>
       </section>
   )

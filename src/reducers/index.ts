@@ -1,17 +1,9 @@
-import type { ActionsType, AnswerType, StatusType } from "../types";
-
-//type TypeTeam = 'red' | 'blue' | 'yellow';
-
-/* const calculateInitialAnswers = (team: TypeTeam): AnswerType[] => {
-  if(team === 'red') return redQuestions;
-  if(team === 'blue') return blueQuestions;
-  if(team === 'yellow') return yellowQuestions;
-  return [];
-}; */
+import type { ActionsType, AnswerType, StatusType, TypeTeam } from "../types";
 
 const UPDATE_ANSWER = 'UPDATE_ANSWER';
 const RESET_ANSWERS = 'RESET_ANSWERS';
 const SET_INITIAL_ANSWERS = 'SET_INITIAL_ANSWERS';
+
 
 const answerReducer = (state: AnswerType[], action: ActionsType ): AnswerType[] => {
     switch (action.type) {
@@ -39,12 +31,12 @@ const answerReducer = (state: AnswerType[], action: ActionsType ): AnswerType[] 
     });
   };
 
-  const resetAnswers = (setTeam: (team: string) => void, dispatch: (action: ActionsType) => void) => {
-    setTeam(''); 
-    dispatch({
-      type: RESET_ANSWERS,
-    });
-  };
-
+  const resetAnswers = (setIsFinalized: (value: boolean) => void , setTeam: (team: TypeTeam | '') => void, dispatch: (action: ActionsType) => void) => {
+  setIsFinalized(false);
+  setTeam('');
+  dispatch({
+    type: RESET_ANSWERS,
+  });
+};
 
   export { answerReducer, updateAnswer, resetAnswers };

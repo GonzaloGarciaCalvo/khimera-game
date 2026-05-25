@@ -1,19 +1,6 @@
 import type { AnswerType } from "./types";
 
 const redQuestions: AnswerType[] = [
-  /* 
-
-
-En dónde está Hasroun?
-
-(mapa con 4 puntos)
-
-A
-B
-C
-D
-
-  */
     {
     id: 0, statement:'En que año llegaron a Costa Rica Miguel Barzuna Mereb y Juana Sauma?', 
     correctAnswer: '1896', 
@@ -36,7 +23,7 @@ D
 
   const blueQuestions: AnswerType[] = [
     {
-      id: 0, statement:'Qué ingrediente no puede faltar en el Kibbeh Nayeeh?' , correctAnswer: 'Todos', status: 'undone', options:['Canela', 'Menta',  'Albahaca', 'Todos']
+      id: 0, statement:'Qué ingrediente se puede omitir en el Kibbeh Nayeeh?' , correctAnswer: 'ninguno', status: 'undone', options:['Canela', 'Menta',  'Albahaca', 'ninguno']
     },
     {
       id: 1, statement:'En donde estaba trabajando tía Georgette antes de su viaje en barco?', correctAnswer: 'Con unos comerciantes', status: 'undone', options:['En una oficina cerca del puerto', 'Con unos comerciantes', 'De traductora', 'Servicio postal']

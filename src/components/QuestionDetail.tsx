@@ -17,7 +17,7 @@ export function QuestionDetail({
   index: number;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  image?: string;
+  image?: string | null;
 }) {
   
   const setCurrentQuestion = useQuestionStore((state) => state.setCurrentQuestion);
@@ -40,16 +40,13 @@ export function QuestionDetail({
       }, 800);
     }
     if (status === 'correct' && currentQuestion >= answersLength - 1) {
-      console.log('ultima pregunta respondida correctamente')
       setTimeout(() => {
         setIsOpen(false);  
       }, 800);
     }
     if (status === 'incorrect') {
-      console.log(" en if timer Respuesta incorrecta")
       setTimeout(() => {
         setIsOpen(false);
-        console.log("Timer cerrado, se puede responder la siguiente pregunta")
       }, 10000);
     }
   };
@@ -57,7 +54,7 @@ export function QuestionDetail({
 	return (
 		<>
 			<h1>Pregunta {index + 1}</h1>
-			<p>{answer?.statement}</p>
+			<p className="questionStatement">{answer?.statement}</p>
       {image && (
         <img 
           src={image} 
@@ -82,7 +79,7 @@ export function QuestionDetail({
                 value={option}
                 required
               /> 
-                {option}
+                <span className="option">{option}</span>
             </label>
           ))}
         </fieldset>
@@ -90,7 +87,8 @@ export function QuestionDetail({
         {
           answer?.status !== 'undone' && (
             <Modal 
-              type={answer?.status === 'correct' ? 'correct' : 'incorrect'} isOpen={isOpen} 
+              type={answer?.status === 'correct' ? 'correct' : 'incorrect'} 
+              isOpen={isOpen} 
               setIsOpen={setIsOpen} 
             />
           )

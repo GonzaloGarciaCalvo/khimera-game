@@ -6,7 +6,6 @@ export function Modal({type, isOpen}: {type: ModalType, isOpen: boolean, setIsOp
 
   return (
     <dialog open={isOpen} className='questionResultModal'>
-      <p>MODAL</p>
       <p>{type === 'incorrect' ? 'Incorrecto, debes esperar 10 segundos !!' : 'Correcto !!'}</p>
     </dialog>
   )

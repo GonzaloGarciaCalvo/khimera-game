@@ -10,8 +10,8 @@ import { answerReducer, resetAnswers, updateAnswer } from "../reducers";
 export function QuestionContainer({ team, setTeam }: { team: TypeTeam | '', setTeam: (team: TypeTeam | '') => void }) {
 
   const initialState = (): AnswerType[] => {
-  return calculateInitialAnswers(team, []);
-};
+    return calculateInitialAnswers(team, []);
+  };
 
   const currentQuestion = useQuestionStore((state) => state.currentQuestion);
   const setAnswerQuantity = useQuestionStore((state) => state.setAnswersQuantity);
@@ -38,7 +38,6 @@ export function QuestionContainer({ team, setTeam }: { team: TypeTeam | '', setT
       }
     } else {
       updateAnswer(questionId, selectedAnswer, 'incorrect', dispatch);
-      console.log('Respuesta incorrecta handleAnswerChange');
       setIsOpen(true);
     }
   };
@@ -65,9 +64,9 @@ export function QuestionContainer({ team, setTeam }: { team: TypeTeam | '', setT
         />
       )}
     <button 
-      onClick={() => resetAnswers(setTeam, dispatch)}
-    >
-      Restablecer respuestas
+      className="resetAnswersBtn" 
+      onClick={() => resetAnswers( setIsFinalized, setTeam,dispatch)}>
+      Cambiar equipo
     </button>
   </section>
   )

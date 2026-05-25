@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 
-
 interface QuestionState {
   currentQuestion: number;
   setCurrentQuestion: () => void;
