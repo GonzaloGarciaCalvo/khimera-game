@@ -4,8 +4,9 @@ import { TeamSelector } from './components/TeamSelector';
 import {QuestionContainer} from './components/QuestionContainer';
 import type { TypeTeam } from './types';
 import { useQuestionStore } from './store';
-import Logo from './assets/logo-Maldonado.png'
+import Logo from './assets/logo-Maldonado-2.png'
 import { Clue } from './components/Clue';
+import Aunts from './assets/aunts.webp'
 //import { CountdownClock } from './components/CountDownClock';
 
 
@@ -23,7 +24,7 @@ function App() {
   return (
 		<>
       <header>
-        <img src={Logo} width={140} height={140} className="logoMaldonado" alt="logo de Maldonado & Asociados" />
+        <img src={Logo} width={140} height={138} className="logoMaldonado" alt="logo de Maldonado & Asociados" />
       </header>
       <main>
         {/* <section>
@@ -36,6 +37,7 @@ function App() {
               <h2>Proceso Sucesorio de la Sra. Georgette de Lucía Sauma Mereb</h2>
             </div>
             <TeamSelector setTeam={handleTeam} team={team} />
+            <img src={Aunts} alt="Tías" className='auntsImg' />
           </>
         )}
         {team && !isFinalized && (
