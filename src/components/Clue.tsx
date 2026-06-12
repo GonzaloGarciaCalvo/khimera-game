@@ -4,10 +4,12 @@ import PistaRed from '../assets/pistaRed.webp'
 import type { TypeTeam } from "../types";
 
 export const Clue = ({team}: {team: TypeTeam}) => {
-  let clueImg: string;
-  if (team === 'blue') clueImg = PistaBlue;
-  if (team === 'red') clueImg = PistaRed;
-  if (team === 'yellow') clueImg = PistaYellow;
 
-  return <img src={clueImg} loading="lazy"  className="clueImg" alt={`pista ${team}`} />;
+  const clueImgs: Record<TypeTeam, string> = {
+  blue: PistaBlue,
+  red: PistaRed,
+  yellow: PistaYellow,
+  }
+
+  return <img src={clueImgs[team]}  className="clueImg" alt={`pista ${team}`} />;
 }
