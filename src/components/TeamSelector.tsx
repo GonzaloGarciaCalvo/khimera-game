@@ -11,9 +11,9 @@ export function TeamSelector({setTeam, team}: {setTeam: (e: React.ChangeEvent<HT
           value={team}
         >
           <option value="">Selecciona tu equipo</option>
-          <option value="blue">Equipo Azul</option>
-          <option value="red">Equipo Rojo</option>
-          <option value="yellow">Equipo Amarillo</option>
+          <option value="red">1. Grupo Rojo: Adultos consanguineos</option>
+          <option value="blue">2. Grupo Azul: Adultos NO consanguineos</option>
+          <option value="yellow">3. Grupo Amarillo: Menores de 18 años</option>
         </select>
       </section>
   )

@@ -2,6 +2,20 @@ header {
   padding-top: 5px;
 }
 
+.instructionBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  padding-inline: 0.75em;
+  padding-bottom: 1.2em;
+  & ul {
+    padding-top: 0.125em;
+    list-style-type: none;
+  }
+}
+
 .open {
   display: inline-block;
 }
